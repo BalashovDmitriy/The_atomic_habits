@@ -5,11 +5,11 @@ from users.models import User
 
 
 class UserRetrieveSerializer(serializers.ModelSerializer):
-    habits = HabitSerializer(source='habits', many=True, read_only=True)
+    # habits = HabitSerializer(source='habits', many=True, read_only=True)
 
     class Meta:
         model = User
-        fields = ('email', 'phone', 'city', 'avatar', 'habits')
+        fields = ('email', 'phone', 'city', 'avatar', )
 
 
 class UserUpdateSerializer(serializers.ModelSerializer):
