@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
+    'redis',
 ]
 
 MIDDLEWARE = [
@@ -174,3 +175,7 @@ SWAGGER_SETTINGS = {
         }
     }
 }
+
+CELERY_BROKER_URL = getenv('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = getenv('CELERY_RESULT_BACKEND')
+CELERY_TIMEZONE = getenv('TIME_ZONE')
