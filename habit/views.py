@@ -1,5 +1,6 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from habit.models import Habit
 from habit.permissions import IsOwner
@@ -32,6 +33,9 @@ class HabitUpdateAPIView(generics.UpdateAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated, IsOwner]
+
+    def partial_update(self, request, *args, **kwargs):
+        return Response({"detail": "Метод PATCH запрещён, используйте метод PUT"})
 
 
 class HabitDestroyAPIView(generics.DestroyAPIView):
