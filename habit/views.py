@@ -44,3 +44,9 @@ class HabitDestroyAPIView(generics.DestroyAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated, IsOwner]
+
+
+class AllHabitListAPIView(generics.ListAPIView):
+    serializer_class = HabitListSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Habit.objects.all().filter(is_public=True)
