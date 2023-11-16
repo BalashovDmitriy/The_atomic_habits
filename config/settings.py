@@ -45,11 +45,13 @@ INSTALLED_APPS = [
     'drf_yasg',
     'redis',
     'django_celery_beat',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -182,3 +184,13 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': timedelta(minutes=1),
     },
 }
+
+CORS_ALLOWED_ORIGINS = [
+    getenv('FRONTEND_URL'),
+]
+
+CORS_TRUSTED_ORIGINS = [
+    getenv('FRONTEND_URL'),
+]
+
+CORS_ALLOW_ALL_ORIGINS = getenv('CORS_ALLOW_ALL_ORIGINS') == '1'
