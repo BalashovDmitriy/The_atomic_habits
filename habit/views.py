@@ -1,3 +1,6 @@
+import datetime
+
+from django.utils import timezone
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -14,6 +17,20 @@ class HabitCreateAPIView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+        now = datetime.datetime.now()
+        now = timezone.make_aware(now, timezone.get_current_timezone()) + datetime.timedelta(hours=1)
+        habit = Habit.objects.get(pk=serializer.data['id'])
+        if habit.time.hour > now.time().hour:
+            habit.date = datetime.datetime.now().date()
+            habit.save()
+        elif habit.time.hour <= now.time().hour:
+            habit.date = datetime.datetime.now().date() + datetime.timedelta(days=1)
+            habit.save()
+        print(habit.time.hour)
+        print(now.time().hour)
+        print(habit.date)
+        # if self.request.data.get('time') < now.time():
+        #     serializer.save(date=datetime.datetime.now().date())
 
 
 class HabitListAPIView(generics.ListAPIView):
@@ -29,6 +46,11 @@ class HabitRetrieveAPIView(generics.RetrieveAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated, IsOwner]
+
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        habit = Habit.objects.get(pk=pk)
+        return super().get_object()
 
 
 class HabitUpdateAPIView(generics.UpdateAPIView):
