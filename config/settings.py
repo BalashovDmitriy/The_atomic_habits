@@ -175,3 +175,10 @@ SWAGGER_SETTINGS = {
 CELERY_BROKER_URL = getenv('CELERY_BROKER_URL')
 CELERY_RESULT_BACKEND = getenv('CELERY_RESULT_BACKEND')
 CELERY_TIMEZONE = getenv('TIME_ZONE')
+
+CELERY_BEAT_SCHEDULE = {
+    'task-name': {
+        'task': 'habit.tasks.habits_worker',
+        'schedule': timedelta(minutes=1),
+    },
+}

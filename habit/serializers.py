@@ -12,6 +12,13 @@ class HabitSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         """ Валидация привычки """
+        # К полезной привычке нужно указать вознаграждение или приятную привычку
+        if not data.get('foreign_habit') and not data.get('reward') and not data.get('is_pleasant'):
+            raise serializers.ValidationError(
+                {
+                    'Habit_validation_error':
+                        'К полезной привычке нужно указать вознаграждение или связанную привычку'}
+            )
         # Исключить одновременный выбор связанной привычки и указания вознаграждения
         if data.get('foreign_habit') and data.get('reward'):
             raise serializers.ValidationError(
