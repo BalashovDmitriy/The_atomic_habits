@@ -51,4 +51,4 @@ class HabitSerializer(serializers.ModelSerializer):
 class HabitListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Habit
-        fields = ['id', 'place', 'time', 'action', 'is_pleasant', 'foreign_habit', 'reward']
+        fields = ['id', 'place', 'time', 'action', 'is_pleasant', 'foreign_habit', 'reward', 'time_to_complete']
