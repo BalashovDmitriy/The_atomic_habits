@@ -26,11 +26,6 @@ class HabitCreateAPIView(generics.CreateAPIView):
         elif habit.time.hour <= now.time().hour:
             habit.date = datetime.datetime.now().date() + datetime.timedelta(days=1)
             habit.save()
-        print(habit.time.hour)
-        print(now.time().hour)
-        print(habit.date)
-        # if self.request.data.get('time') < now.time():
-        #     serializer.save(date=datetime.datetime.now().date())
 
 
 class HabitListAPIView(generics.ListAPIView):
@@ -46,11 +41,6 @@ class HabitRetrieveAPIView(generics.RetrieveAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated, IsOwner]
-
-    def get_object(self):
-        pk = self.kwargs.get('pk')
-        habit = Habit.objects.get(pk=pk)
-        return super().get_object()
 
 
 class HabitUpdateAPIView(generics.UpdateAPIView):

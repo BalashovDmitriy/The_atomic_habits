@@ -1,11 +1,9 @@
 from rest_framework import serializers
 
-from habit.serializers import HabitSerializer
 from users.models import User
 
 
 class UserRetrieveSerializer(serializers.ModelSerializer):
-    # habits = HabitSerializer(source='habits', many=True, read_only=True)
 
     class Meta:
         model = User
