@@ -7,13 +7,13 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email', 'phone', 'city', 'avatar',)
+        fields = ('email', 'phone', 'city', 'avatar', 'telegram_id')
 
 
 class UserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('phone', 'city', 'avatar')
+        fields = ('phone', 'city', 'avatar', 'telegram_id')
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
