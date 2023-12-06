@@ -2,6 +2,12 @@
 
 ### Установка:
 
+### Docker-compose:
+- Установить docker и docker-compose командой ```apt install docker.io docker-compose```
+- Сбилдить и запустить ```docker-compose build``` ```docker-compose up```
+
+### Другой вариант:
+
 - Убедитесь, что у вас установлен python 3.11 или более новая версия
 - Убедитесь, что у вас установлен PostgreSQL и запущен локальный сервер базы данных
 - Убедитесь, что у вас установлен Redis и запущен redis-сервер
